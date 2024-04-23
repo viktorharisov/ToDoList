@@ -1,10 +1,11 @@
 import TaskInput from "../TaskInput/Taskinput";
 import TaskList from "../TaskList/TaskList";
 import {useState} from "react";
-import {Button, ChakraProvider} from "@chakra-ui/react";
+import {ChakraProvider} from "@chakra-ui/react";
 import { v4 as uuidv4 } from 'uuid';
 import TaskStatus from "../TaskStatus/TaskStatus";
-import {DeleteIcon} from "@chakra-ui/icons";
+
+import TasksDelete from "../TaskStatus/TasksDelete";
 
 const TodoList = () => {
 
@@ -22,37 +23,14 @@ const TodoList = () => {
             const newTask = {
                 id: uuidv4(),
                 text: text,
-                isDone: false,
-                isImportant: false,
+                isDone: status === 'done',
+                isImportant: status === 'important',
             };
             setTasks((prevTasks) => [...prevTasks,newTask]);
         }else{
             alert('Напишите задачу');
         }
-
     }
-
-    const deleteTasksByStatus = () => {
-        switch (status) {
-            case 'important':
-                return setTasks((prev) => prev.filter((item)=>!item.isImportant))
-            case 'done':
-                return setTasks((prev) => prev.filter((item)=>!item.isDone))
-            default:
-                return setTasks([])
-        }
-    }
-
-    const tabText = () => {
-        switch (status) {
-            case 'done':
-                return 'выполненных';
-            case 'important':
-                return 'важных';
-            default:
-                return 'всех задач';
-        }
-    };
 
     const removeTask = (id) => {
         setTasks((prevTasks)=> prevTasks.filter((task)=> task.id !== id))
@@ -76,13 +54,9 @@ const TodoList = () => {
                           setTasks={setTasks}
                           tasks={tasks}
                           onRemoveTask={removeTask} />
-                <div className='delete__status'>
-                    <Button
-                        onClick={deleteTasksByStatus}>
-                        Очистить список задач из {tabText()}
-                        <DeleteIcon ms={1}/>
-                    </Button>
-                </div>
+                <TasksDelete status={status}
+                             setTasks={setTasks}
+                             tasks={tasks}/>
             </div>
         </ChakraProvider>
     );
