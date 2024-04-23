@@ -12,9 +12,9 @@ const TaskInput = ({ onAddTask }) => {
 
     };
     return (
-        <form onSubmit={onFinish}>
-            <input type='text' name = "label"/>
-            <button type='submit'>Создать</button>
+        <form onSubmit={onFinish} className='todo__block-form'>
+            <input className='todo__block-input' type='text' name = "label" placeholder='Напишите задачу'/>
+            <button className='todo__block-btn' type='submit'>Создать</button>
         </form>
     );
 };
