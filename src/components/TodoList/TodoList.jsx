@@ -32,22 +32,30 @@ const TodoList = () => {
 
     }
 
-    // const deleteTasksByStatus = () => {
-    //     switch (status) {
-    //         case 'important':
-    //             return setTasks((prev) => prev.filter((item)=>!item.isImportant))
-    //         case 'done':
-    //             return setTasks((prev) => prev.filter((item)=>!item.isDone))
-    //         default:
-    //             return setTasks([])
-    //     }
-    // }
+    const deleteTasksByStatus = () => {
+        switch (status) {
+            case 'important':
+                return setTasks((prev) => prev.filter((item)=>!item.isImportant))
+            case 'done':
+                return setTasks((prev) => prev.filter((item)=>!item.isDone))
+            default:
+                return setTasks([])
+        }
+    }
 
-    const tabText = status === 'done' ? 'всех задач' : (status === 'important' ? 'важных' : 'выполненных');
-
+    const tabText = () => {
+        switch (status) {
+            case 'done':
+                return 'выполненных';
+            case 'important':
+                return 'важных';
+            default:
+                return 'всех задач';
+        }
+    };
 
     const removeTask = (id) => {
-        setTasks((prevTasks)=> prevTasks.filter((t)=> t.id !== id))
+        setTasks((prevTasks)=> prevTasks.filter((task)=> task.id !== id))
     }
 
     return(
@@ -69,11 +77,11 @@ const TodoList = () => {
                           tasks={tasks}
                           onRemoveTask={removeTask} />
                 <div className='delete__status'>
-                    {/*<Button*/}
-                    {/*    onClick={deleteTasksByStatus}>*/}
-                    {/*    Очистить список задач из {tabText}*/}
-                    {/*    <DeleteIcon ms={1}/>*/}
-                    {/*</Button>*/}
+                    <Button
+                        onClick={deleteTasksByStatus}>
+                        Очистить список задач из {tabText()}
+                        <DeleteIcon ms={1}/>
+                    </Button>
                 </div>
             </div>
         </ChakraProvider>

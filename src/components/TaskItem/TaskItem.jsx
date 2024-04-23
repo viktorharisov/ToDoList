@@ -1,19 +1,22 @@
 import React from 'react';
 import EditModal from "./EditModal";
-import {doneHandler} from "../TaskService/TaskService";
-import {CheckIcon} from "@chakra-ui/icons";
+import {doneHandler, importantHandler} from "../TaskService/TaskService";
+import {CheckIcon, SunIcon} from "@chakra-ui/icons";
 
 const TaskItem = ({task, onRemoveTask, setTasks}) => {
     return (
         <li className='item_delete'
-            style ={{display: 'flex', alignItems: 'center', gap: '20px'}} >
-            <button onClick = {() => doneHandler(task.id, setTasks)}>
-                <CheckIcon color ={task.isDone ? 'green' : 'black'}/>
+            style={{display: 'flex', alignItems: 'center', gap: '20px'}}>
+            <button onClick={() => doneHandler(task.id, setTasks)}>
+                <CheckIcon color={task.isDone ? 'green' : 'black'}/>
+            </button>
+            <button onClick={() => importantHandler(task.id, setTasks)}>
+                <SunIcon color={task.isImportant ? 'orangered' : 'black'}/>
             </button>
 
             <p className='item_delete-text'>{task.text}</p>
-            <EditModal text={task.text} id = {task.id} setTasks={setTasks}/>
-            <button onClick={() => onRemoveTask(task.id) }>Удалить</button>
+            <EditModal text={task.text} id={task.id} setTasks={setTasks}/>
+            <button onClick={() => onRemoveTask(task.id)}>Удалить</button>
 
         </li>
     );
