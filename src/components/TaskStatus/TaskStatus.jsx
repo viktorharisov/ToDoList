@@ -2,7 +2,7 @@ import { Tabs, TabList, Tab} from '@chakra-ui/react'
 
 const TaskStatus = ({setStatus}) => {
     return(
-    <>
+    <div className='todo__block-tabs'>
         <Tabs variant='soft-rounded' colorScheme='green'>
             <TabList>
                 <Tab onClick={() => setStatus('all')}>Все задачи</Tab>
@@ -11,7 +11,7 @@ const TaskStatus = ({setStatus}) => {
 
             </TabList>
         </Tabs>
-    </>
+    </div>
     )}
 
 export default TaskStatus

@@ -4,6 +4,8 @@ import {useState} from "react";
 import {ChakraProvider} from "@chakra-ui/react";
 import { v4 as uuidv4 } from 'uuid';
 import TaskStatus from "../TaskStatus/TaskStatus";
+import "../styles/style.scss";
+
 
 import TasksDelete from "../TaskStatus/TasksDelete";
 
@@ -38,16 +40,8 @@ const TodoList = () => {
 
     return(
         <ChakraProvider>
-            <div className='todo_block'
-                style = {{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    minHeight: '100vh',
-
-            }}>
-                <h1>Todolist</h1>
+            <div className='todo__block'>
+                <h1 className='todo__block-title'>Todolist</h1>
                 <TaskInput onAddTask={addTask}/>
                 <TaskStatus setStatus={setStatus} />
                 <TaskList status={status}

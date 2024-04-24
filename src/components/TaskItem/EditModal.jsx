@@ -29,7 +29,7 @@ const EditModal = ({text, id, setTasks}) => {
 
     return (
         <>
-            <Button onClick={onOpen}><EditIcon/></Button>
+            <Button className='todo__block-edit' onClick={onOpen}><EditIcon/></Button>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
